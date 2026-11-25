@@ -1,0 +1,19 @@
+# Secrets and local config: never commit
+scripts/config.ps1
+.env
+.env.*
+*.pem
+*.key
+.aws/
+credentials
+*.csv.secret
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+# Misc
+node_modules/
+*.log
+*.zip

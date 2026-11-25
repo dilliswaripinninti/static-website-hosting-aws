@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><title>EdgeFolio | Static website on AWS S3 and CloudFront</title><meta name="description" content="A static portfolio website served globally through Amazon CloudFront from a private Amazon S3 bucket."></head>
+<body>
+<header><nav class="wrap" aria-label="Main"><a class="brand" href="index.html"><img src="assets/favicon.svg" alt="">EdgeFolio</a><button class="menu" id="menuBtn" aria-expanded="false" aria-controls="navList">Menu</button><ul id="navList"><li><a href="index.html#about">About</a></li><li><a href="index.html#services">Services</a></li><li><a href="index.html#stack">Tech stack</a></li><li><a href="about.html">Architecture</a></li><li><a href="index.html#contact">Contact</a></li></ul></nav></header>
+<main>
+<section class="hero"><div class="wrap">
+<h1>Served from the edge, stored in a private bucket.</h1>
+<p>EdgeFolio is a static website hosted on AWS. Visitors never touch the S3 bucket: CloudFront fetches files over HTTPS using Origin Access Control and caches them close to every reader.</p>
+<div class="actions"><a class="btn primary" href="about.html">See the architecture</a><a class="btn ghost" href="#contact">Get in touch</a></div>
+<div class="path" role="img" aria-label="Request path: visitor to CloudFront edge to private S3 bucket">
+<div class="node"><b>Visitor</b>browser</div><div class="link"></div>
+<div class="node edge"><b>CloudFront</b>edge cache, HTTPS</div><div class="link l2"></div>
+<div class="node"><b>S3 bucket</b>private, OAC only</div>
+<div class="path-note">Cache hits are answered at the edge. Only misses travel to S3.</div></div>
+</div></section>
+
+<section id="about"><div class="wrap two reveal"><div><h2>About this project</h2>
+<p class="lead">I am a B.Tech student in Artificial Intelligence and Data Science. I built this site to practise real cloud deployment: private storage, a global CDN, scoped IAM permissions, and a repeatable PowerShell release script.</p>
+<p class="lead" style="margin-top:1rem">Replace this text with your own introduction before you publish.</p></div>
+<ul class="facts"><li><strong>Private by default</strong><span>Block Public Access stays on for the bucket.</span></li><li><strong>HTTPS everywhere</strong><span>HTTP requests redirect to HTTPS at CloudFront.</span></li><li><strong>One-command releases</strong><span>deploy.ps1 uploads, sets content types and clears the cache.</span></li></ul></div></section>
+
+<section id="services" class="alt"><div class="wrap reveal"><h2>What this setup gives you</h2><p class="lead">Each part of the stack has one job.</p>
+<div class="grid">
+<article class="card"><h3>Global delivery</h3><p>CloudFront caches pages at edge locations, so readers load files from a nearby location instead of your bucket's Region.</p></article>
+<article class="card"><h3>Locked-down storage</h3><p>A bucket policy allows reads only from your CloudFront distribution. Direct S3 URLs return 403.</p></article>
+<article class="card"><h3>Least-privilege deploys</h3><p>The deploy user can write to one bucket and invalidate one distribution, and nothing else.</p></article>
+<article class="card"><h3>Friendly errors</h3><p>Missing pages return your own 404 page with a real 404 status code.</p></article></div></div></section>
+
+<section id="stack"><div class="wrap reveal"><h2>Technology stack</h2><p class="lead">Plain web standards on the front end, managed AWS services behind it.</p>
+<div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Amazon S3 <small>storage</small></span><span class="tag">CloudFront <small>CDN</small></span><span class="tag">Origin Access Control</span><span class="tag">AWS IAM</span><span class="tag">AWS CLI</span><span class="tag">PowerShell</span><span class="tag">Git and GitHub</span></div></div></section>
+
+<section id="contact" class="alt"><div class="wrap reveal"><h2>Contact</h2><p class="lead">This is a static site with no backend, so the form opens your email app with the message filled in.</p>
+<form id="contactForm" data-to="you@example.com" novalidate>
+<div><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
+<div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+<div><label for="message">Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
+<button class="btn primary" type="submit">Send message</button><p class="msg" id="formMsg" role="status"></p></form></div></section>
+</main>
+<footer><div class="wrap"><span>© <span id="year">2026</span> Your Name. Hosted on Amazon S3 and CloudFront.</span><a href="https://github.com/YOUR-GITHUB-USERNAME/static-website-hosting-aws">View source on GitHub</a></div></footer><script src="js/script.js"></script>
+</body></html>
